@@ -99,10 +99,14 @@ const loading_video=(videos)=>{
     videos.forEach(video => {
         const new_div=document.createElement('div');
         new_div.classList=`card bg-base-100 w-96 shadow-xl`;
-        new_div.innerHTML=` <figure>
-                <img
+        new_div.innerHTML=` <figure class="h-[312px] relative">
+                <img class="h-full w-full object-cover"
                     src=${video.thumbnail}
                     alt="Shoes" />
+                    ${
+                        video.others.posted_date?.length==0?"":` <span class="absolute bottom-4 text-white right-0 mr-2 bg-black">${find_time(video.others.posted_date)} </span>
+`
+                    }
             </figure>
             <div class=" flex flex-col ">
                 <div class="flex gap-5 mt-5  w-full">
@@ -114,7 +118,9 @@ const loading_video=(videos)=>{
                     <!-- Title -->
                      <div class="flex-grow flex flex-col gap-3">
                         <h1 class=" w-fit text-xl font-bold">${video.title}</h1>
-                        <span class=""><h1 class="font-thin inline pr-3 text-xl">${video.authors[0].profile_name}</h1><img class="h-5 w-5 inline" src="design/ok-svgrepo-com.svg" alt="" srcset="">
+                        <span class=""><h1 class="font-thin inline pr-3 text-xl">${video.authors[0].profile_name}</h1>
+                        ${video.authors[0].verified==true?`<img class="h-5 w-5 inline" src="design/ok-svgrepo-com.svg" alt="" srcset="">
+`:""}
                         </span>
                         <h1 class="text-xl">${video.others.views}</h1>
                     </div>
@@ -126,3 +132,12 @@ const loading_video=(videos)=>{
     
 
 }
+const find_time=(time)=>{
+    const hour=parseInt(time/3600);
+    const remaining_second=time%3600;
+    const minutes=parseInt(remaining_second/60);
+    const remaining_last_second=remaining_second%60;
+    
+    
+    return`${hour} h ${minutes} m ${remaining_last_second} s`
+    }
