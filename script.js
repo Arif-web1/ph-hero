@@ -108,15 +108,15 @@ const loading_video=(videos)=>{
                 <div class="flex gap-5 mt-5  w-full">
                     
                     <div class="">
-                        <img class="h-10 w-10" src="https://sharkcoder.com/files/article/shapes_circle.png" alt="">
+                        <img class="h-10 w-10  rounded-full " src=${video.authors[0].profile_picture} alt="">
                     </div> 
 
                     <!-- Title -->
                      <div class="flex-grow flex flex-col gap-3">
-                        <h1 class=" w-fit text-xl font-bold">Building a Winning UX Strategy Using the Kano Model</h1>
-                        <span class=""><h1 class="font-thin inline pr-3 text-xl">Awlad Hossain</h1><img class="h-5 w-5 inline" src="design/ok-svgrepo-com.svg" alt="" srcset="">
+                        <h1 class=" w-fit text-xl font-bold">${video.title}</h1>
+                        <span class=""><h1 class="font-thin inline pr-3 text-xl">${video.authors[0].profile_name}</h1><img class="h-5 w-5 inline" src="design/ok-svgrepo-com.svg" alt="" srcset="">
                         </span>
-                        <h1 class="text-xl">91k views</h1>
+                        <h1 class="text-xl">${video.others.views}</h1>
                     </div>
                 </div>
                             </div> `
