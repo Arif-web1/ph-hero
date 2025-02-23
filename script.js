@@ -198,15 +198,21 @@ const modal_details=await fetch(`https://openapi.programming-hero.com/api/phero-
 
 
     }
-    const modal_show=(data)=>{
-        console.log(data.thumbnail);
-        document.getElementById('custom').showModal();
-        const container=document.getElementById('detail_container');
-        console.log(container);
-        
-        container.innerHTML=`
-        <img class="" src=${data.thumbnail}/>
-        <p class="">${data.description}</p>
-        `
-        
-    }
+    const modal_show = (data) => {
+        console.log("Thumbnail:", data.thumbnail);
+    
+        // Get modal and container
+        const modal = document.getElementById('custom');
+        const container = document.getElementById('detail_container');
+    
+        // Make sure only new content is added inside `#detail_container`
+        container.innerHTML = `
+            <img class="h-1/2" src="${data.thumbnail}" />
+            <p class="mt-4 text-sm">${data.description}</p>
+        `;
+    
+        // Open the modal
+        modal.showModal();
+    };
+         
+    

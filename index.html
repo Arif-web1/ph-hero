@@ -11,7 +11,7 @@
     <!-- css -->
      <link rel="stylesheet" href="style.css">
 </head>
-<body class="mb-10">
+<body class="">
     <header>
         <nav  class="container mx-auto flex justify-between items-center mt-5">
             <!-- Logo -->
@@ -63,13 +63,17 @@
     </section>
     <!-- modal -->
      <!-- You can open the modal using ID.showModal() method -->
-<button class="btn hidden" onclick="custom.showModal()">open modal</button>
+
+     <button class="btn" onclick="custom.showModal()">Open Modal</button>
+
 <dialog id="custom" class="modal">
-  <div id="detail_container" class="modal-box w-11/12 max-w-5xl">
-    
+  <div class="modal-box">
+    <div id="detail_container">
+      <!-- Dynamic content will be inserted here -->
+    </div>
     <div class="modal-action">
       <form method="dialog">
-        <!-- if there is a button, it will close the modal -->
+        <!-- Close button stays intact -->
         <button class="btn">Close</button>
       </form>
     </div>
