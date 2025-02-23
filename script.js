@@ -44,17 +44,30 @@ const navbar=document.getElementById('navbar');
 
 const load_button=(data_categories)=>{
 data_categories.forEach(element => {
-    const new_btn=document.createElement('button');
-    new_btn.classList=`btn`;
-    new_btn.innerText=element.category;
-    navbar.appendChild(new_btn)
-    
+    const new_div=document.createElement('div');
+    new_div.innerHTML=`
+    <button onclick="click_category(${element.category_id})" class="btn">${element.category} </button>
+    `
+   
+    navbar.appendChild(new_div)
+console.log(element.category_id);
+
 });
 
 
 
 }
+const click_category=(id)=>{
+    console.log(id);
+    
+fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+.then((res)=>res.json())
+.then((data)=>data.category)
+.then((newdata)=>loading_video(newdata))
 
+.catch((error)=>console.log(error)
+)
+}
 
 
 // {
@@ -96,6 +109,9 @@ const main_video=document.getElementById('main-video');
 console.log(main_video);
 
 const loading_video=(videos)=>{
+    
+main_video.innerHTML='';
+    
     videos.forEach(video => {
         const new_div=document.createElement('div');
         new_div.classList=`card bg-base-100 w-96 shadow-xl`;
