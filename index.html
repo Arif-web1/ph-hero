@@ -8,8 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- DaisyUI CDN -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- css -->
+     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="mb-10">
     <header>
         <nav  class="container mx-auto flex justify-between items-center mt-5">
             <!-- Logo -->
@@ -59,6 +61,20 @@
                             </div> -->
         <!-- </div> -->
     </section>
+    <!-- modal -->
+     <!-- You can open the modal using ID.showModal() method -->
+<button class="btn hidden" onclick="custom.showModal()">open modal</button>
+<dialog id="custom" class="modal">
+  <div id="detail_container" class="modal-box w-11/12 max-w-5xl">
+    
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
     <script src="script.js"></script>
 </body>

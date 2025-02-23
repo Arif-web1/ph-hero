@@ -29,7 +29,6 @@ const load_categories=async()=>{
         const data_categories=data.categories;
         load_button(data_categories);
         // console.log(data_categories);
-        
     } catch (error) {
         console.error('eror',error)
     }
@@ -46,7 +45,7 @@ const load_button=(data_categories)=>{
 data_categories.forEach(element => {
     const new_div=document.createElement('div');
     new_div.innerHTML=`
-    <button onclick="click_category(${element.category_id})" class="btn">${element.category} </button>
+    <button id="btn-${element.category_id}" onclick="click_category(${element.category_id})" class="btn btn-ctg">${element.category} </button>
     `
    
     navbar.appendChild(new_div)
@@ -63,7 +62,12 @@ const click_category=(id)=>{
 fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
 .then((res)=>res.json())
 .then((data)=>data.category)
-.then((newdata)=>loading_video(newdata))
+.then((newdata)=>{
+    loading_video(newdata)
+    remove_button()
+const active_button=document.getElementById(`btn-${id}`)
+active_button.classList.add('active')
+})
 
 .catch((error)=>console.log(error)
 )
@@ -111,7 +115,19 @@ console.log(main_video);
 const loading_video=(videos)=>{
     
 main_video.innerHTML='';
-    
+    if (videos.length==0) {
+        main_video.classList.remove('grid');
+        const div2=document.createElement('div');
+        div2.classList=`flex flex-col justify-center items-center min-h-[300px]`
+        div2.innerHTML=`
+        <img class='' src='Icon.png' >
+        <h1 class='text-4xl font-semibold'>no context here</h1>
+        `
+main_video.appendChild(div2);
+return;
+    } else {
+        main_video.classList.add('grid')
+    }
     videos.forEach(video => {
         const new_div=document.createElement('div');
         new_div.classList=`card bg-base-100 w-96 shadow-xl`;
@@ -141,7 +157,7 @@ main_video.innerHTML='';
                         <h1 class="text-xl">${video.others.views}</h1>
                     </div>
                 </div>
-                            </div> `
+               <button onclick="show_details('${video.video_id}')"  // Add quotes around the ID class="btn btn-sm btn-accent"> details</button> </div> `
                             main_video.appendChild(new_div);
         
     });
@@ -156,4 +172,41 @@ const find_time=(time)=>{
     
     
     return`${hour} h ${minutes} m ${remaining_last_second} s`
+    }
+
+    function remove_button() {
+        const all_button=document.getElementsByClassName('btn-ctg');
+        for (const element of all_button) {
+            element.classList.remove('active')
+        }
+        
+    }
+    // show modal details
+    const show_details=async(video_details)=>{
+        console.log(video_details);
+try {
+            
+const modal_details=await fetch(`https://openapi.programming-hero.com/api/phero-tube/video/${video_details}`)
+    const response=await modal_details.json();
+    const video_data=response.video;
+    modal_show(video_data)
+        
+} catch (error) {
+    console.error('eror',error);
+}
+// console.log(response);
+
+
+    }
+    const modal_show=(data)=>{
+        console.log(data.thumbnail);
+        document.getElementById('custom').showModal();
+        const container=document.getElementById('detail_container');
+        console.log(container);
+        
+        container.innerHTML=`
+        <img class="" src=${data.thumbnail}/>
+        <p class="">${data.description}</p>
+        `
+        
     }
