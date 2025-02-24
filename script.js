@@ -65,7 +65,8 @@ fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
 .then((newdata)=>{
     loading_video(newdata)
     remove_button()
-const active_button=document.getElementById(`btn-${id}`)
+const active_button=document.getElementById(`btn-${id}`);
+
 active_button.classList.add('active')
 })
 
@@ -232,4 +233,10 @@ const modal_details=await fetch(`https://openapi.programming-hero.com/api/phero-
 
             
          }
-    
+// add all button
+const all_button=document.getElementById('all');
+
+all_button.addEventListener('click',function () {
+    remove_button();
+  all_button.classList.add('active');
+})
