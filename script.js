@@ -210,9 +210,26 @@ const modal_details=await fetch(`https://openapi.programming-hero.com/api/phero-
             <img class="h-1/2" src="${data.thumbnail}" />
             <p class="mt-4 text-sm">${data.description}</p>
         `;
-    
+     
         // Open the modal
         modal.showModal();
     };
-         
+
+    // search input
+    const input_filed=document.getElementById('search-input');
+    console.log(input_filed);
+    
+    input_filed.addEventListener('keyup',function (e) {
+        search_box(e.target.value);
+        
+    })
+         const search_box=async(input_value)=>{
+            const response=await fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${input_value}`);
+                const data=await response.json();
+                const new_data=data.videos;
+                loading_video(new_data);
+                
+
+            
+         }
     
